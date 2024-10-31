@@ -54,7 +54,7 @@ extension DocumentReference {
     }
   }
   
-  func setData<T: Encodable>(
+  public func setData<T: Encodable>(
     from value: T,
     encoder: Firestore.Encoder = Firestore.Encoder()
   ) async throws {
