@@ -53,6 +53,14 @@ extension DocumentReference {
       }
     }
   }
+  
+  func setData<T: Encodable>(
+    from value: T,
+    encoder: Firestore.Encoder = Firestore.Encoder()
+  ) async throws {
+    let encoded = try encoder.encode(value)
+    try await self.setData(encoded)
+  }
 }
 
 extension DocumentSnapshot {
