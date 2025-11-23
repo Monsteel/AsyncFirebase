@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
   name: "AsyncFirebase",
-  platforms: [.iOS(.v13), .macOS(.v10_15), .tvOS(.v13)],
+  platforms: [.iOS(.v15), .macCatalyst(.v15), .macOS(.v10_15), .tvOS(.v15), .watchOS(.v7)],
   products: [
     .library(
       name: "AsyncFirebase",
@@ -28,7 +28,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "11.0.0")),
+    .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "12.6.0")),
   ],
   targets: [
     .target(
