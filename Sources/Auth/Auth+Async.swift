@@ -5,7 +5,9 @@
 //  Created by Tony on 10/30/24.
 //
 
-import FirebaseAuth
+@preconcurrency import FirebaseAuth
+
+extension FirebaseAuth.User: @unchecked @retroactive Sendable {}
 
 extension Auth {
   public func stateDidChangeAsync() -> AsyncStream<User?> {

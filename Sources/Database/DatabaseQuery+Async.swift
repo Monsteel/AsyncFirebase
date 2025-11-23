@@ -6,9 +6,9 @@
 //  Copyright © 2024 Tony. All rights reserved.
 //
 
-import FirebaseDatabase
+@preconcurrency import FirebaseDatabase
 
-extension DatabaseQuery {
+extension DatabaseQuery: @unchecked @retroactive Sendable {
   public func async(eventType: DataEventType) -> AsyncThrowingStream<DataSnapshot, Error> {
     return AsyncThrowingStream { continuation in
       let handle = self.observe(eventType, with: { snapshot in
@@ -16,8 +16,8 @@ extension DatabaseQuery {
       }, withCancel: { error in
         continuation.finish(throwing: error)
       })
-      
-      continuation.onTermination = { _ in
+
+      continuation.onTermination = { @Sendable _ in
         self.removeObserver(withHandle: handle)
       }
     }

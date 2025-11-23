@@ -6,7 +6,7 @@
 //  Copyright © 2024 Tony. All rights reserved.
 //
 
-import FirebaseStorage
+@preconcurrency import FirebaseStorage
 
 extension StorageObservableTask {
   public func asyncStream(status: StorageTaskStatus) -> AsyncStream<StorageTaskSnapshot> {

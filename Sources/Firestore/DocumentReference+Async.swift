@@ -6,7 +6,7 @@
 //  Copyright © 2024 Tony. All rights reserved.
 //
 
-import FirebaseFirestore
+@preconcurrency import FirebaseFirestore
 
 extension DocumentReference {
   public func async(includeMetadataChanges: Bool = true) -> AsyncThrowingStream<DocumentSnapshot, Error> {
@@ -30,7 +30,7 @@ extension DocumentReference {
     }
   }
   
-  public func async<D: Decodable>(includeMetadataChanges: Bool = true, as type: D.Type, documentSnapshotMapper: @escaping (DocumentSnapshot) throws -> D? = DocumentSnapshot.defaultMapper()) -> AsyncThrowingStream<D?, Error> {
+  public func async<D: Decodable & Sendable>(includeMetadataChanges: Bool = true, as type: D.Type, documentSnapshotMapper: @escaping (DocumentSnapshot) throws -> D? = DocumentSnapshot.defaultMapper()) -> AsyncThrowingStream<D?, Error> {
     AsyncThrowingStream { continuation in
       let listener = self.addSnapshotListener(includeMetadataChanges: includeMetadataChanges) { (snapshot, error) in
         if let error = error {
